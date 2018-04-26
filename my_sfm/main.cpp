@@ -42,6 +42,9 @@ int main()
 	////等待任意按键按下
 	//waitKey(0);
 
+
+	cp_filename = " ";
+
 	namedWindow("【match图】", 0);
 	// 读入图像
 	Mat img_1_raw = imread("D:\\v1.jpg");
@@ -53,7 +56,7 @@ int main()
 	// 压缩一下，提高速度，sift太慢
 	resize(img_1_raw, img_1, Size(), 0.4, 0.4);
 	resize(img_2_raw, img_2, Size(), 0.4, 0.4);
-	// 检测特征点
+	// 检测特征点	
 	vector<KeyPoint> keypoints_1, keypoints_2;
 	Mat descriptors_1, descriptors_2;
 	extract_features(img_1, keypoints_1, descriptors_1, colors1);
@@ -64,12 +67,12 @@ int main()
 
 
 
-	////绘制匹配出的关键点
-	//Mat img_matches;
-	//drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
-	//imshow("【match图】", img_matches);
-	////等待任意按键按下
-	//waitKey(0);
+	//绘制匹配出的关键点
+	Mat img_matches;
+	drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
+	imshow("【match图】", img_matches);
+	//等待任意按键按下
+	waitKey(0);
 
 
 }

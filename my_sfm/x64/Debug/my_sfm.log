@@ -1,17 +1,17 @@
-﻿生成启动时间为 2018/4/25 20:56:06。
-     1>项目“D:\vsproject\3dreconstruction\my_sfm\my_sfm\my_sfm.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2018/4/26 15:48:09。
+     1>项目“C:\Users\zdz\Desktop\git\my_sfm\my_sfm\my_sfm.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /ID:\opencv_contrib\install\include /ID:\opencv_contrib\install\include\opencv /ID:\opencv_contrib\install\include\opencv2 /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt funcs.cpp
-         funcs.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /ID:\opencv_contrib\install\include /ID:\opencv_contrib\install\include\opencv /ID:\opencv_contrib\install\include\opencv2 /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
      1>D:\opencv_contrib\install\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>D:\opencv_contrib\install\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>D:\opencv_contrib\install\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\vsproject\3dreconstruction\my_sfm\x64\Debug\my_sfm.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\opencv_contrib\install\x64\vc12\lib opencv_core300d.lib opencv_features2d300d.lib opencv_highgui300d.lib opencv_imgcodecs300d.lib opencv_imgproc300d.lib opencv_photo300d.lib opencv_xfeatures2d300d.lib opencv_ximgproc300d.lib opencv_rgbd300d.lib opencv_calib3d300d.lib opencv_ccalib300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\vsproject\3dreconstruction\my_sfm\x64\Debug\my_sfm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\vsproject\3dreconstruction\my_sfm\x64\Debug\my_sfm.lib" /MACHINE:X64 x64\Debug\funcs.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\opencv_contrib\install\x64\vc12\lib opencv_core300d.lib opencv_features2d300d.lib opencv_highgui300d.lib opencv_imgcodecs300d.lib opencv_imgproc300d.lib opencv_photo300d.lib opencv_xfeatures2d300d.lib opencv_ximgproc300d.lib opencv_rgbd300d.lib opencv_calib3d300d.lib opencv_ccalib300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.lib" /MACHINE:X64 x64\Debug\funcs.obj
          x64\Debug\main.obj
-         my_sfm.vcxproj -> D:\vsproject\3dreconstruction\my_sfm\x64\Debug\my_sfm.exe
-     1>已完成生成项目“D:\vsproject\3dreconstruction\my_sfm\my_sfm\my_sfm.vcxproj”(Build 个目标)的操作。
+         my_sfm.vcxproj -> C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.exe
+     1>已完成生成项目“C:\Users\zdz\Desktop\git\my_sfm\my_sfm\my_sfm.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:01.55
+已用时间 00:00:05.71

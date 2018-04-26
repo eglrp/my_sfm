@@ -102,7 +102,7 @@ bool get_RT(Mat K, vector<Point2f>& p1, vector<Point2f>& p2, Mat &R, Mat &T, Mat
 *	该函数用于三维重建，重建方式为三角化
 *	OpenCV提供了该方法，可以直接使用
 */
-void reconstruct(Mat& K, Mat& R, Mat& T, vector<Point2f>& p1, vector<Point2f>& p2, Mat& structure)
+void reconstruct(Mat& K, Mat& R, Mat& T, vector<Point2f>& p1, vector<Point2f>& p2, Mat& cps)
 {
 	//两个相机的投影矩阵[R T]，triangulatePoints只支持float型
 	Mat proj1(3, 4, CV_32FC1);
@@ -121,5 +121,13 @@ void reconstruct(Mat& K, Mat& R, Mat& T, vector<Point2f>& p1, vector<Point2f>& p
 	proj2 = fK*proj2;
 
 	//三角化重建
-	triangulatePoints(proj1, proj2, p1, p2, structure);
+	triangulatePoints(proj1, proj2, p1, p2, cps);
+}
+
+/*
+*	该函数用于存储获得的点云数据到txt文件中
+*	格式为x y z b g r
+*/
+void save_cps(const char *filename, Mat cps) {
+
 }
