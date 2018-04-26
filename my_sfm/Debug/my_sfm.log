@@ -1,0 +1,40 @@
+﻿生成启动时间为 2018/4/15 10:57:44。
+     1>项目“D:\vsproject\3dreconstruction\my_sfm\my_sfm\my_sfm.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>d:\opencv_contrib\install\include\opencv2\core\mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>d:\opencv_contrib\install\include\opencv2\core\persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>d:\opencv_contrib\install\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\vsproject\3dreconstruction\my_sfm\Debug\my_sfm.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\opencv_contrib\install\x64\vc12\lib opencv_features2d300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\vsproject\3dreconstruction\my_sfm\Debug\my_sfm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\vsproject\3dreconstruction\my_sfm\Debug\my_sfm.lib" /MACHINE:X86 Debug\main.obj
+     1>main.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::fastFree(void *)" (?fastFree@cv@@YAXPAX@Z)，该符号在函数 "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ) 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "private: char * __thiscall cv::String::allocate(unsigned int)" (?allocate@String@cv@@AAEPADI@Z)，该符号在函数 "public: __thiscall cv::String::String(char const *)" (??0String@cv@@QAE@PBD@Z) 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "private: void __thiscall cv::String::deallocate(void)" (?deallocate@String@cv@@AAEXXZ)，该符号在函数 "public: __thiscall cv::String::~String(void)" (??1String@cv@@QAE@XZ) 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "class cv::_InputOutputArray const & __cdecl cv::noArray(void)" (?noArray@cv@@YAABV_InputOutputArray@1@XZ)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall cv::Mat::deallocate(void)" (?deallocate@Mat@cv@@QAEXXZ)，该符号在函数 "public: void __thiscall cv::Mat::release(void)" (?release@Mat@cv@@QAEXXZ) 中被引用
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall cv::Algorithm::save(class cv::String const &)const " (?save@Algorithm@cv@@UBEXABVString@2@@Z)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual class cv::String __thiscall cv::Algorithm::getDefaultName(void)const " (?getDefaultName@Algorithm@cv@@UBE?AVString@2@XZ)
+     1>main.obj : error LNK2019: 无法解析的外部符号 "public: virtual __thiscall cv::DescriptorMatcher::~DescriptorMatcher(void)" (??1DescriptorMatcher@cv@@UAE@XZ)，该符号在函数 "public: virtual __thiscall cv::BFMatcher::~BFMatcher(void)" (??1BFMatcher@cv@@UAE@XZ) 中被引用
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall cv::DescriptorMatcher::add(class cv::_InputArray const &)" (?add@DescriptorMatcher@cv@@UAEXABV_InputArray@2@@Z)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall cv::DescriptorMatcher::clear(void)" (?clear@DescriptorMatcher@cv@@UAEXXZ)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual bool __thiscall cv::DescriptorMatcher::empty(void)const " (?empty@DescriptorMatcher@cv@@UBE_NXZ)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall cv::DescriptorMatcher::train(void)" (?train@DescriptorMatcher@cv@@UAEXXZ)
+     1>main.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall cv::DescriptorMatcher::match(class cv::_InputArray const &,class cv::_InputArray const &,class std::vector<class cv::DMatch,class std::allocator<class cv::DMatch> > &,class cv::_InputArray const &)const " (?match@DescriptorMatcher@cv@@QBEXABV_InputArray@2@0AAV?$vector@VDMatch@cv@@V?$allocator@VDMatch@cv@@@std@@@std@@0@Z)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall cv::DescriptorMatcher::read(class cv::FileNode const &)" (?read@DescriptorMatcher@cv@@UAEXABVFileNode@2@@Z)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall cv::DescriptorMatcher::write(class cv::FileStorage &)const " (?write@DescriptorMatcher@cv@@UBEXAAVFileStorage@2@@Z)
+     1>main.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::BFMatcher::BFMatcher(int,bool)" (??0BFMatcher@cv@@QAE@H_N@Z)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2001: 无法解析的外部符号 "public: virtual struct cv::Ptr<class cv::DescriptorMatcher> __thiscall cv::BFMatcher::clone(bool)const " (?clone@BFMatcher@cv@@UBE?AU?$Ptr@VDescriptorMatcher@cv@@@2@_N@Z)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "protected: virtual void __thiscall cv::BFMatcher::knnMatchImpl(class cv::_InputArray const &,class std::vector<class std::vector<class cv::DMatch,class std::allocator<class cv::DMatch> >,class std::allocator<class std::vector<class cv::DMatch,class std::allocator<class cv::DMatch> > > > &,int,class cv::_InputArray const &,bool)" (?knnMatchImpl@BFMatcher@cv@@MAEXABV_InputArray@2@AAV?$vector@V?$vector@VDMatch@cv@@V?$allocator@VDMatch@cv@@@std@@@std@@V?$allocator@V?$vector@VDMatch@cv@@V?$allocator@VDMatch@cv@@@std@@@std@@@2@@std@@H0_N@Z)
+     1>main.obj : error LNK2001: 无法解析的外部符号 "protected: virtual void __thiscall cv::BFMatcher::radiusMatchImpl(class cv::_InputArray const &,class std::vector<class std::vector<class cv::DMatch,class std::allocator<class cv::DMatch> >,class std::allocator<class std::vector<class cv::DMatch,class std::allocator<class cv::DMatch> > > > &,float,class cv::_InputArray const &,bool)" (?radiusMatchImpl@BFMatcher@cv@@MAEXABV_InputArray@2@AAV?$vector@V?$vector@VDMatch@cv@@V?$allocator@VDMatch@cv@@@std@@@std@@V?$allocator@V?$vector@VDMatch@cv@@V?$allocator@VDMatch@cv@@@std@@@std@@@2@@std@@M0_N@Z)
+     1>main.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::drawMatches(class cv::_InputArray const &,class std::vector<class cv::KeyPoint,class std::allocator<class cv::KeyPoint> > const &,class cv::_InputArray const &,class std::vector<class cv::KeyPoint,class std::allocator<class cv::KeyPoint> > const &,class std::vector<class cv::DMatch,class std::allocator<class cv::DMatch> > const &,class cv::_InputOutputArray const &,class cv::Scalar_<double> const &,class cv::Scalar_<double> const &,class std::vector<char,class std::allocator<char> > const &,int)" (?drawMatches@cv@@YAXABV_InputArray@1@ABV?$vector@VKeyPoint@cv@@V?$allocator@VKeyPoint@cv@@@std@@@std@@01ABV?$vector@VDMatch@cv@@V?$allocator@VDMatch@cv@@@std@@@4@ABV_InputOutputArray@1@ABV?$Scalar_@N@1@4ABV?$vector@DV?$allocator@D@std@@@4@H@Z)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "class cv::Mat __cdecl cv::imread(class cv::String const &,int)" (?imread@cv@@YA?AVMat@1@ABVString@1@H@Z)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "int __cdecl cv::waitKey(int)" (?waitKey@cv@@YAHH@Z)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::imshow(class cv::String const &,class cv::_InputArray const &)" (?imshow@cv@@YAXABVString@1@ABV_InputArray@1@@Z)，该符号在函数 _main 中被引用
+     1>main.obj : error LNK2019: 无法解析的外部符号 "public: static struct cv::Ptr<class cv::xfeatures2d::SIFT> __cdecl cv::xfeatures2d::SIFT::create(int,int,double,double,double)" (?create@SIFT@xfeatures2d@cv@@SA?AU?$Ptr@VSIFT@xfeatures2d@cv@@@3@HHNNN@Z)，该符号在函数 _main 中被引用
+     1>D:\vsproject\3dreconstruction\my_sfm\Debug\my_sfm.exe : fatal error LNK1120: 24 个无法解析的外部命令
+     1>已完成生成项目“D:\vsproject\3dreconstruction\my_sfm\my_sfm\my_sfm.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:05.74
