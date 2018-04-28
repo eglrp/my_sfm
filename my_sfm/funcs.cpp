@@ -3,7 +3,7 @@
 /*
 *	该函数用于提取特征点,保存特征点信息，描述子信息，以及颜色信息
 */ 
-void extract_features(Mat &img, vector<KeyPoint> &key_points, Mat &descriptors, vector<Vec3b> colors) {
+void extract_features(Mat &img, vector<KeyPoint> &key_points, Mat &descriptors, vector<Vec3b> &colors) {
 
 	Ptr<Feature2D> sift = xfeatures2d::SIFT::create();	// 可以直接把SIFT换成SURF等
 
@@ -130,8 +130,8 @@ void get_matched_points(
 	vector<KeyPoint> keypoints_1, 
 	vector<KeyPoint>keypoints_2, 
 	vector<DMatch> matches, 
-	vector<Point2f>p1, 
-	vector<Point2f>p2) {
+	vector<Point2f> &p1, 
+	vector<Point2f> &p2) {
 	// 清空
 	p1.clear();
 	p2.clear();
@@ -153,14 +153,15 @@ void get_matched_colors(
 	)
 {
 	matched_colors.clear();
-	Vec3b temp;
+	
 	for (int i = 0; i < matches.size(); ++i)
 	{
-		temp = c1[matches[i].queryIdx];
+		Vec3b temp;
+		//temp = c1[matches[i].queryIdx];
 		// 取两个点的平均值
-		temp.val[0] = (temp.val[0] + c2[matches[i].trainIdx].val[0]) / 2;
-		temp.val[1] = (temp.val[1] + c2[matches[i].trainIdx].val[1]) / 2;
-		temp.val[2] = (temp.val[2] + c2[matches[i].trainIdx].val[2]) / 2;
+		temp.val[0] = (c1[matches[i].queryIdx].val[0] + c2[matches[i].trainIdx].val[0]) / 2;
+		temp.val[1] = (c1[matches[i].queryIdx].val[1] + c2[matches[i].trainIdx].val[1]) / 2;
+		temp.val[2] = (c1[matches[i].queryIdx].val[2] + c2[matches[i].trainIdx].val[2]) / 2;
 		matched_colors.push_back(temp);
 	}
 }
@@ -201,7 +202,7 @@ bool save_cps(const char *filename, Mat cps, vector<Vec3b> colors) {
 	{
 		Mat_<float> c = cps.col(i);
 		c /= c(3);	//齐次坐标，需要除以最后一个元素才是真正的坐标值
-		outfile << c(0) << " " << c(1) << " " << c(2) << colors[i].val[0] << " " << colors[i].val[1] << " " << colors[i].val[2] << endl;
+		outfile << c(0) << " " << c(1) << " " << c(2) << " " << (unsigned int)colors[i].val[0] << " " << (unsigned int)colors[i].val[1] << " " << (unsigned int)colors[i].val[2] << endl;
 	}
 
 	outfile.close();

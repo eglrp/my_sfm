@@ -19,11 +19,11 @@
 using namespace cv;  //°üº¬cvÃüÃû¿Õ¼ä
 using namespace std;
 
-void extract_features(Mat &img, vector<KeyPoint> &key_points, Mat &descriptors, vector<Vec3b> colors);
+void extract_features(Mat &img, vector<KeyPoint> &key_points, Mat &descriptors, vector<Vec3b> &colors);
 void match_features(Mat& query, Mat& train, vector<DMatch>& matches);
 bool get_RT(Mat K, vector<Point2f>& p1, vector<Point2f>& p2, Mat &R, Mat &T, Mat &mask);
 void get_matched_colors(vector<Vec3b>& c1, vector<Vec3b>& c2, vector<DMatch> matches, vector<Vec3b>& matched_colors);
-void get_matched_points(vector<KeyPoint> keypoints_1, vector<KeyPoint>keypoints_2, vector<DMatch> matches, vector<Point2f>p1, vector<Point2f>p2);
+void get_matched_points(vector<KeyPoint> keypoints_1, vector<KeyPoint>keypoints_2, vector<DMatch> matches, vector<Point2f> &p1, vector<Point2f> &p2);
 void maskout_points(vector<Point2f>& p1, Mat& mask);
 void reconstruct(Mat& K, Mat& R, Mat& T, vector<Point2f>& p1, vector<Point2f>& p2, Mat& structure);
 bool save_cps(const char *filename, Mat cps, vector<Vec3b> colors);

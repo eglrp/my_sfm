@@ -1,52 +1,10 @@
 #include "sfm_h.h"
 
-//#include <iostream>
-//#include <opencv2/opencv.hpp>  //头文件
-//#include <opencv2/xfeatures2d.hpp>
-//using namespace cv;  //包含cv命名空间
-//using namespace std;
-
 char *save_filename = "D:\\save.txt";
 char *read_filename = "D:\\save.txt";
 
 int main()
 {
-	////Create SIFT class pointer
-	//Ptr<Feature2D> f2d = xfeatures2d::SURF::create();
-	//cvNamedWindow("【match图】");
-	////读入图片
-	//cout << "a";
-	//Mat img_1_raw = imread("D:\\v1.jpg");
-	//Mat img_2_raw = imread("D:\\V2.jpg");
-	//Mat img_1;
-	//Mat img_2;
-	//resize(img_1_raw, img_1, Size(), 0.2, 0.2);
-	//resize(img_2_raw, img_2, Size(), 0.2, 0.2);
-
-	//cout << "b";
-	////Detect the keypoints
-	//vector<KeyPoint> keypoints_1, keypoints_2;
-	//f2d->detect(img_1, keypoints_1);
-	//f2d->detect(img_2, keypoints_2);
-	//cout << "c";
-	////Calculate descriptors (feature vectors)
-	//Mat descriptors_1, descriptors_2;
-	//f2d->compute(img_1, keypoints_1, descriptors_1);
-	//f2d->compute(img_2, keypoints_2, descriptors_2);
-	////Matching descriptor vector using BFMatcher
-	//cout << "d";
-	//BFMatcher matcher;
-	//vector<DMatch> matches;
-	//matcher.match(descriptors_1, descriptors_2, matches);
-	////绘制匹配出的关键点
-	//Mat img_matches;
-	//drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
-	//imshow("【match图】", img_matches);
-	////等待任意按键按下
-	//waitKey(0);
-
-
-
 	// TODO 把cout删掉
 
 
@@ -64,19 +22,18 @@ int main()
 
 	// 读入图像
 	cout << "loading..." << endl;
-	/*Mat img_1_raw = imread("D:\\v1.jpg");
-	Mat img_2_raw = imread("D:\\V2.jpg");
+	Mat img_1_raw = imread("D:\\v1.jpg");
+	Mat img_2_raw = imread("D:\\v2.jpg");
 	Mat img_1;
-	Mat img_2;*/
-	Mat img_1 = imread("D:\\0004.png");
-	Mat img_2 = imread("D:\\0006.png");
+	Mat img_2;
+	//Mat img_1 = imread("D:\\0004.png");
+	//Mat img_2 = imread("D:\\0006.png");
 	vector<Vec3b> colors1;
 	vector<Vec3b> colors2;
 	
-
-	//// 压缩一下，提高速度，sift太慢
-	//resize(img_1_raw, img_1, Size(), 0.4, 0.4);
-	//resize(img_2_raw, img_2, Size(), 0.4, 0.4);
+	// 压缩一下，提高速度，sift太慢
+	resize(img_1_raw, img_1, Size(), 0.4, 0.4);
+	resize(img_2_raw, img_2, Size(), 0.4, 0.4);
 
 	// 检测特征点	
 	cout << "detect" << endl;
