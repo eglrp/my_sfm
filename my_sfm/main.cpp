@@ -3,7 +3,7 @@
 char *save_filename = "D:\\save.txt";
 char *read_filename = "D:\\save.txt";
 
-int main()
+int main(int argc, char *argv[])
 {
 	// TODO 把cout删掉
 
@@ -13,27 +13,31 @@ int main()
 		K = 0    fy   y0
 			0    0    1
 	*/
-	Mat K(Matx33d(
+	/*Mat K(Matx33d(
 		2759.48, 0, 1520.69,
 		0, 2764.16, 1006.81,
-		0, 0, 1));
+		0, 0, 1));*/
+	Mat K(Matx33d(
+	2759.48, 0, 1520.69,
+	0, 2764.16, 1006.81,
+	0, 0, 1));
 
 	namedWindow("【match图】", 0);
 
 	// 读入图像
 	cout << "loading..." << endl;
-	Mat img_1_raw = imread("D:\\v1.jpg");
-	Mat img_2_raw = imread("D:\\v2.jpg");
+	/*Mat img_1_raw = imread("D:\\0004.png");
+	Mat img_2_raw = imread("D:\\0006.png");
 	Mat img_1;
-	Mat img_2;
-	//Mat img_1 = imread("D:\\0004.png");
-	//Mat img_2 = imread("D:\\0006.png");
+	Mat img_2;*/
+	Mat img_1 = imread("D:\\0004.png");
+	Mat img_2 = imread("D:\\0006.png");
 	vector<Vec3b> colors1;
 	vector<Vec3b> colors2;
 	
-	// 压缩一下，提高速度，sift太慢
-	resize(img_1_raw, img_1, Size(), 0.4, 0.4);
-	resize(img_2_raw, img_2, Size(), 0.4, 0.4);
+	//// 压缩一下，提高速度，sift太慢
+	//resize(img_1_raw, img_1, Size(), 0.4, 0.4);
+	//resize(img_2_raw, img_2, Size(), 0.4, 0.4);
 
 	// 检测特征点	
 	cout << "detect" << endl;
@@ -75,5 +79,6 @@ int main()
 	//等待任意按键按下
 	waitKey(0);
 
+	gl_main(argc, argv);
 
 }

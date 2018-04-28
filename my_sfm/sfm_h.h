@@ -30,6 +30,7 @@ bool save_cps(const char *filename, Mat cps, vector<Vec3b> colors);
 
 // opengl相关显示函数
 void show_cps(const char *cp_filename);
+void gl_main(int argc, char *argv[]);
 
 extern char *save_filename;
 extern char *read_filename;
