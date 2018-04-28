@@ -1,7 +1,6 @@
 #include "sfm_h.h"
 
 
-
 //GLuint drawcube, drawteapot;
 //
 //void reshape(int w, int h)
@@ -60,17 +59,17 @@ void show_cps(void) {
 	//glEnable(GL_COLOR_MATERIAL);		// 激活GL_COLOR_MATERIAL可以在激活光照的情况下用glColor函数给物体上色。这个方法又称为颜色追踪。
 	//glColorMaterial(GL_FRONT, GL_AMBIENT);
 
-
+	errno_t err;
 	FILE *fp = NULL;
 
-	fp = fopen(cp_filename, "r");//其中cp_filename代表我们点云文件的位置
+	err = fopen_s(&fp, read_filename, "r"); //fp = fopen(read_filename, "r");其中read_filename代表我们点云文件的位置
 	float	x, y, z;	// 坐标
 	unsigned int b, g, r;	// 颜色
 	float fb, fg, fr;
 
 	while (!feof(fp))
 	{
-		fscanf(fp, "%f %f %f %u %u %u\n", &x, &y, &z, &b, &g, &r);//读取6个数据并赋予fx，fy，fz，x，y，z。
+		fscanf_s(fp, "%f %f %f %u %u %u\n", &x, &y, &z, &b, &g, &r);//读取6个数据并赋予fx，fy，fz，x，y，z。
 		// 在读取的bgr代表颜色的数据为0 - 255的整数，而在OpenGL中对颜色的表示为0 - 1之间。故为bgr除以255。
 		fb = (float)b / 255;
 		fg = (float)g / 255;

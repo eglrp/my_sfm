@@ -97,7 +97,6 @@ bool get_RT(Mat K, vector<Point2f>& p1, vector<Point2f>& p2, Mat &R, Mat &T, Mat
 }
 
 
-
 /*
 *	该函数用于三维重建，重建方式为三角化
 *	OpenCV提供了该方法，可以直接使用
@@ -125,9 +124,85 @@ void reconstruct(Mat& K, Mat& R, Mat& T, vector<Point2f>& p1, vector<Point2f>& p
 }
 
 /*
+*	该函数用于获取匹配到的点
+*/
+void get_matched_points(
+	vector<KeyPoint> keypoints_1, 
+	vector<KeyPoint>keypoints_2, 
+	vector<DMatch> matches, 
+	vector<Point2f>p1, 
+	vector<Point2f>p2) {
+	// 清空
+	p1.clear();
+	p2.clear();
+	for (int i = 0; i < matches.size(); ++i)
+	{
+		p1.push_back(keypoints_1[matches[i].queryIdx].pt);
+		p2.push_back(keypoints_2[matches[i].trainIdx].pt);
+	}
+}
+
+/*
+*	该函数用于获取匹配点的颜色
+*/
+void get_matched_colors(
+	vector<Vec3b>& c1,
+	vector<Vec3b>& c2,
+	vector<DMatch> matches,
+	vector<Vec3b>& matched_colors
+	)
+{
+	matched_colors.clear();
+	Vec3b temp;
+	for (int i = 0; i < matches.size(); ++i)
+	{
+		temp = c1[matches[i].queryIdx];
+		// 取两个点的平均值
+		temp.val[0] = (temp.val[0] + c2[matches[i].trainIdx].val[0]) / 2;
+		temp.val[1] = (temp.val[1] + c2[matches[i].trainIdx].val[1]) / 2;
+		temp.val[2] = (temp.val[2] + c2[matches[i].trainIdx].val[2]) / 2;
+		matched_colors.push_back(temp);
+	}
+}
+
+
+/*
+*	该函数用于再次去除失配点
+*/
+void maskout_points(vector<Point2f>& p1, Mat& mask)
+{
+	vector<Point2f> p1_copy = p1;
+	p1.clear();
+
+	for (int i = 0; i < mask.rows; ++i)
+	{
+		if (mask.at<uchar>(i) > 0)
+			p1.push_back(p1_copy[i]);
+	}
+}
+
+
+/*
 *	该函数用于存储获得的点云数据到txt文件中
 *	格式为x y z b g r
+*	返回true/false，指示是否成功保存
+*	cps保存的是点云数据，4行N列的矩阵，每一列代表空间中的一个点（齐次坐标）
+*	colors依次存放颜色
 */
-void save_cps(const char *filename, Mat cps) {
+bool save_cps(const char *filename, Mat cps, vector<Vec3b> colors) {
+	ofstream outfile(filename);	// 打开要保存到的文件，没有则会创建
+	// 打开失败则终止
+	if (!outfile){
+		cout << filename << "打开失败！";	// TODO 不要光显示在控制台
+		return false;
+	}
 
+	for (size_t i = 0; i < cps.cols; ++i)
+	{
+		Mat_<float> c = cps.col(i);
+		c /= c(3);	//齐次坐标，需要除以最后一个元素才是真正的坐标值
+		outfile << c(0) << " " << c(1) << " " << c(2) << colors[i].val[0] << " " << colors[i].val[1] << " " << colors[i].val[2] << endl;
+	}
+
+	outfile.close();
 }
