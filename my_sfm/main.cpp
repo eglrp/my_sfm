@@ -79,6 +79,26 @@ int main(int argc, char *argv[])
 	//等待任意按键按下
 	waitKey(0);
 
-	gl_main(argc, argv);
 
+
+
+
+	//gl_main(argc, argv);
+
+
+
+
+	cout << "doing triangulation..." << endl;
+	vector<Vec3i> tri;
+	TriSubDiv(ptsL, imgL, tri);
+
+	/************************************************************************/
+	/* Draw 3D scene using OpenGL                                           */
+	/************************************************************************/
+	glutInit(&argc, argv); // must be called first in a glut program
+	InitGl(); // must be called first in a glut program
+
+	cout << "creating 3D texture..." << endl;
+	GLuint tex = Create3DTexture(imgL, tri, ptsL, pts3D, center3D, size3D);
+	Show(tex, center3D, size3D);
 }

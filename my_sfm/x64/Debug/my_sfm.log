@@ -1,20 +1,163 @@
-﻿生成启动时间为 2018/4/28 20:09:34。
-     1>项目“C:\Users\zdz\Desktop\git\my_sfm\my_sfm\my_sfm.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2018/4/30 15:45:38。
+     1>项目“C:\Users\zdz\Desktop\git\my_sfm\my_sfm\my_sfm.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /ID:\opencv_contrib\install\include /ID:\opencv_contrib\install\include\opencv /ID:\opencv_contrib\install\include\opencv2 /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt glfuncs.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /ID:\opencv_contrib\install\include /ID:\opencv_contrib\install\include\opencv /ID:\opencv_contrib\install\include\opencv2 /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt funcs.cpp funcs_texture_test.cpp glfuncs.cpp glfuncs_texture_test.cpp main.cpp
+         main.cpp
+     1>D:\opencv_contrib\install\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>main.cpp(93): error C2065: “ptsL”: 未声明的标识符
+     1>main.cpp(93): error C2065: “imgL”: 未声明的标识符
+     1>main.cpp(93): error C3861: “TriSubDiv”:  找不到标识符
+     1>main.cpp(99): error C3861: “InitGl”:  找不到标识符
+     1>main.cpp(102): error C2065: “imgL”: 未声明的标识符
+     1>main.cpp(102): error C2065: “ptsL”: 未声明的标识符
+     1>main.cpp(102): error C2065: “pts3D”: 未声明的标识符
+     1>main.cpp(102): error C2065: “center3D”: 未声明的标识符
+     1>main.cpp(102): error C2065: “size3D”: 未声明的标识符
+     1>main.cpp(102): error C3861: “Create3DTexture”:  找不到标识符
+     1>main.cpp(103): error C2065: “center3D”: 未声明的标识符
+     1>main.cpp(103): error C2065: “size3D”: 未声明的标识符
+     1>main.cpp(103): error C3861: “Show”:  找不到标识符
+         glfuncs_texture_test.cpp
+     1>D:\opencv_contrib\install\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(96): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(97): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(98): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(99): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(100): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(101): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(102): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(103): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(104): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(105): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(106): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(107): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(108): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(109): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(110): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(111): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(112): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(113): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(114): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(115): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(116): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(117): error C3861: “_T”:  找不到标识符
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include\atltrace.h(118): error C3861: “_T”:  找不到标识符
+     1>glfuncs_texture_test.cpp(73): error C2065: “center3D”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(73): error C2065: “size3D”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(73): error C2661: “cv::max”: 没有重载函数接受 1 个参数
+     1>glfuncs_texture_test.cpp(120): error C2065: “displayGl”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(121): error C2065: “resizeGl”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(122): error C2065: “keyboard_control_Gl”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(123): error C2065: “special_control_Gl”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(124): error C2065: “mouseGl”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(125): error C2065: “mouse_move_Gl”: 未声明的标识符
+     1>glfuncs_texture_test.cpp(136): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+     1>glfuncs_texture_test.cpp(178): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>glfuncs_texture_test.cpp(179): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>glfuncs_texture_test.cpp(180): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>glfuncs_texture_test.cpp(190): warning C4305: “参数”: 从“double”到“GLfloat”截断
+     1>glfuncs_texture_test.cpp(194): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+     1>glfuncs_texture_test.cpp(246): warning C4305: “-=”: 从“double”到“float”截断
+     1>glfuncs_texture_test.cpp(250): warning C4305: “+=”: 从“double”到“float”截断
          glfuncs.cpp
      1>D:\opencv_contrib\install\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>D:\opencv_contrib\install\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>D:\opencv_contrib\install\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>glfuncs.cpp(75): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
      1>glfuncs.cpp(76): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\opencv_contrib\install\x64\vc12\lib opencv_core300d.lib opencv_features2d300d.lib opencv_highgui300d.lib opencv_imgcodecs300d.lib opencv_imgproc300d.lib opencv_photo300d.lib opencv_xfeatures2d300d.lib opencv_ximgproc300d.lib opencv_rgbd300d.lib opencv_calib3d300d.lib opencv_ccalib300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.lib" /MACHINE:X64 x64\Debug\funcs.obj
-         x64\Debug\glfuncs.obj
-         x64\Debug\main.obj
-         my_sfm.vcxproj -> C:\Users\zdz\Desktop\git\my_sfm\x64\Debug\my_sfm.exe
-     1>已完成生成项目“C:\Users\zdz\Desktop\git\my_sfm\my_sfm\my_sfm.vcxproj”(Build 个目标)的操作。
+         funcs_texture_test.cpp
+     1>D:\opencv_contrib\install\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>funcs_texture_test.cpp(6): error C2065: “CvSubdiv2D”: 未声明的标识符
+     1>funcs_texture_test.cpp(6): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(10): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(10): error C2070: “unknown-type”:  非法的 sizeof 操作数
+     1>funcs_texture_test.cpp(11): error C2065: “CvSubdiv2DPoint”: 未声明的标识符
+     1>funcs_texture_test.cpp(11): error C2070: “unknown-type”:  非法的 sizeof 操作数
+     1>funcs_texture_test.cpp(12): error C2065: “CvQuadEdge2D”: 未声明的标识符
+     1>funcs_texture_test.cpp(12): error C2070: “unknown-type”:  非法的 sizeof 操作数
+     1>funcs_texture_test.cpp(10): error C3861: “cvCreateSubdiv2D”:  找不到标识符
+     1>funcs_texture_test.cpp(15): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(15): error C3861: “cvInitSubdivDelaunay2D”:  找不到标识符
+     1>funcs_texture_test.cpp(20): error C2065: “CvSubdiv2DPoint”: 未声明的标识符
+     1>funcs_texture_test.cpp(20): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(20): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(20): error C3861: “cvSubdivDelaunay2DInsert”:  找不到标识符
+     1>funcs_texture_test.cpp(21): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(21): error C2227: “->id”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(25): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(25): error C2227: “->edges”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(25): error C2227: “->total”的左边必须指向类/结构/联合/泛型类型
+     1>funcs_texture_test.cpp(26): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(26): error C2227: “->edges”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(26): error C2227: “->elem_size”的左边必须指向类/结构/联合/泛型类型
+     1>funcs_texture_test.cpp(28): error C2065: “subdiv”: 未声明的标识符
+     1>funcs_texture_test.cpp(28): error C2227: “->edges”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(34): error C3861: “time”:  找不到标识符
+     1>funcs_texture_test.cpp(37): error C2065: “CvQuadEdge2D”: 未声明的标识符
+     1>funcs_texture_test.cpp(37): error C2065: “edge”: 未声明的标识符
+     1>funcs_texture_test.cpp(37): error C2059: 语法错误:“)”
+     1>funcs_texture_test.cpp(39): error C2065: “edge”: 未声明的标识符
+     1>funcs_texture_test.cpp(39): error C2227: “->flags”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(41): error C2065: “CvSubdiv2DEdge”: 未声明的标识符
+     1>funcs_texture_test.cpp(41): error C2146: 语法错误: 缺少“;”(在标识符“t”的前面)
+     1>funcs_texture_test.cpp(41): error C2065: “t”: 未声明的标识符
+     1>funcs_texture_test.cpp(41): error C2146: 语法错误: 缺少“;”(在标识符“edge”的前面)
+     1>funcs_texture_test.cpp(41): error C2065: “edge”: 未声明的标识符
+     1>funcs_texture_test.cpp(49): error C2065: “CvSubdiv2DPoint”: 未声明的标识符
+     1>funcs_texture_test.cpp(49): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(49): error C2065: “t”: 未声明的标识符
+     1>funcs_texture_test.cpp(49): error C3861: “cvSubdiv2DEdgeOrg”:  找不到标识符
+     1>funcs_texture_test.cpp(50): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(51): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(51): error C2227: “->pt”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(53): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(53): error C2227: “->id”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(54): error C2065: “t”: 未声明的标识符
+     1>funcs_texture_test.cpp(54): error C2065: “CV_NEXT_AROUND_LEFT”: 未声明的标识符
+     1>funcs_texture_test.cpp(54): error C3861: “cvSubdiv2DGetEdge”:  找不到标识符
+     1>funcs_texture_test.cpp(57): error C3861: “isGoodTri”:  找不到标识符
+     1>funcs_texture_test.cpp(69): error C2065: “t”: 未声明的标识符
+     1>funcs_texture_test.cpp(69): error C2065: “CvSubdiv2DEdge”: 未声明的标识符
+     1>funcs_texture_test.cpp(69): error C2146: 语法错误: 缺少“;”(在标识符“edge”的前面)
+     1>funcs_texture_test.cpp(69): error C2065: “edge”: 未声明的标识符
+     1>funcs_texture_test.cpp(73): error C2065: “CvSubdiv2DPoint”: 未声明的标识符
+     1>funcs_texture_test.cpp(73): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(73): error C2065: “t”: 未声明的标识符
+     1>funcs_texture_test.cpp(73): error C3861: “cvSubdiv2DEdgeOrg”:  找不到标识符
+     1>funcs_texture_test.cpp(74): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(75): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(75): error C2227: “->pt”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(76): error C2065: “pt”: 未声明的标识符
+     1>funcs_texture_test.cpp(76): error C2227: “->id”的左边必须指向类/结构/联合/泛型类型
+                 类型是“unknown-type”
+     1>funcs_texture_test.cpp(77): error C2065: “t”: 未声明的标识符
+     1>funcs_texture_test.cpp(77): error C2065: “CV_NEXT_AROUND_LEFT”: 未声明的标识符
+     1>funcs_texture_test.cpp(77): error C3861: “cvSubdiv2DGetEdge”:  找不到标识符
+     1>funcs_texture_test.cpp(80): error C3861: “isGoodTri”:  找不到标识符
+         funcs.cpp
+     1>D:\opencv_contrib\install\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>D:\opencv_contrib\install\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>funcs.cpp(18): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>funcs.cpp(203): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+         正在生成代码...
+     1>c:\users\zdz\desktop\git\my_sfm\my_sfm\funcs.cpp(209): warning C4715: “save_cps”: 不是所有的控件路径都返回值
+     1>已完成生成项目“C:\Users\zdz\Desktop\git\my_sfm\my_sfm\my_sfm.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:06.11
+已用时间 00:00:15.43

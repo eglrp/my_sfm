@@ -153,7 +153,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="funcs.cpp" />
+    <ClCompile Include="funcs_texture_test.cpp" />
     <ClCompile Include="glfuncs.cpp" />
+    <ClCompile Include="glfuncs_texture_test.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
