@@ -89,7 +89,7 @@ void show_cps(void) {
 	int level = 10;
 
 	// TODO
-	glPointSize(4.0f);		// 设置每个点的大小为多少像素
+	glPointSize(2.0f);		// 设置每个点的大小为多少像素
 	glBegin(GL_POINTS);
 	while (!feof(fp))
 	{
@@ -135,7 +135,7 @@ void timer(int p)
 	//marks the current window as needing to be redisplayed.  
 	glutPostRedisplay();
 	if (loopr)
-		glutTimerFunc(200, timer, 0);
+		glutTimerFunc(100, timer, 0);
 }
 
 

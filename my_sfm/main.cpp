@@ -83,22 +83,22 @@ int main(int argc, char *argv[])
 
 
 
-	//gl_main(argc, argv);
+	gl_main(argc, argv);
 
 
 
 
-	cout << "doing triangulation..." << endl;
-	vector<Vec3i> tri;
-	TriSubDiv(ptsL, imgL, tri);
+	//cout << "doing triangulation..." << endl;
+	//vector<Vec3i> tri;
+	//TriSubDiv(ptsL, imgL, tri);
 
-	/************************************************************************/
-	/* Draw 3D scene using OpenGL                                           */
-	/************************************************************************/
-	glutInit(&argc, argv); // must be called first in a glut program
-	InitGl(); // must be called first in a glut program
+	///************************************************************************/
+	///* Draw 3D scene using OpenGL                                           */
+	///************************************************************************/
+	//glutInit(&argc, argv); // must be called first in a glut program
+	//InitGl(); // must be called first in a glut program
 
-	cout << "creating 3D texture..." << endl;
-	GLuint tex = Create3DTexture(imgL, tri, ptsL, pts3D, center3D, size3D);
-	Show(tex, center3D, size3D);
+	//cout << "creating 3D texture..." << endl;
+	//GLuint tex = Create3DTexture(imgL, tri, ptsL, pts3D, center3D, size3D);
+	//Show(tex, center3D, size3D);
 }

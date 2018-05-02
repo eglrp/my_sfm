@@ -41,7 +41,7 @@ void match_features(Mat& query, Mat& train, vector<DMatch>& matches) {
 	for (int r = 0; r < knn_matches.size(); ++r)
 	{
 		//Ratio Test
-		if (knn_matches[r][0].distance > 0.9*knn_matches[r][1].distance)
+		if (knn_matches[r][0].distance > 0.6*knn_matches[r][1].distance)
 			continue;
 
 		float dist = knn_matches[r][0].distance;
@@ -53,7 +53,7 @@ void match_features(Mat& query, Mat& train, vector<DMatch>& matches) {
 	{
 		//排除不满足Ratio Test的点和匹配距离过大的点
 		if (
-			knn_matches[r][0].distance > 0.9*knn_matches[r][1].distance ||
+			knn_matches[r][0].distance > 0.6*knn_matches[r][1].distance ||
 			knn_matches[r][0].distance > 5 * max(min_dist, 10.0f)
 			)
 			continue;
