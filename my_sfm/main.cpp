@@ -68,37 +68,76 @@ int main(int argc, char *argv[])
 	maskout_points(p2, mask);
 	reconstruct(K, R, T, p1, p2, cps);
 
-	// 保存得到的点云数据
-	cout << "save" << endl;
-	save_cps(save_filename, cps, matched_colors);
-
-	//绘制匹配出的关键点
-	Mat img_matches;
-	drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
-	imshow("【match图】", img_matches);
-	//等待任意按键按下
-	waitKey(0);
 
 
+	vector<Point3f> pts3D;
+	Point3f center3D;
+	Vec3f size3D;
+	float minX = 1e9, maxX = -1e9;
+	float minY = 1e9, maxY = -1e9;
+	float minZ = 1e9, maxZ = -1e9;
+	for (size_t i = 0; i < cps.cols; ++i) {
+		Point3f pt3D;
+		Mat_<float> c = cps.col(i);
+		c /= c(3);	//齐次坐标，需要除以最后一个元素才是真正的坐标值
+		pt3D.x = c(0);
+		pt3D.y = c(1);
+		pt3D.z = c(2);
+		minX = min(minX, c(0)); maxX = max(maxX, c(0));
+		minY = min(minY, c(1)); maxY = max(maxY, c(1));
+		minZ = min(minZ, c(2)); maxZ = max(maxZ, c(2));
+		pts3D.push_back(pt3D);
+	}
+	center3D.x = (minX + maxX) / 2;
+	center3D.y = (minY + maxY) / 2;
+	center3D.z = (minZ + maxZ) / 2;
+	size3D[0] = maxX - minX;
+	size3D[1] = maxY - minY;
+	size3D[2] = maxZ - minZ;
+
+
+	/*vector<Point2f> ptsL;
+	DMatch m1;
+	for (size_t i = 0; i < matches.size(); i++)
+	{
+		m1 = matches[i];
+		ptsL.push_back(keypoints_1[m1.queryIdx].pt);
+	}*/
 
 
 
-	gl_main(argc, argv);
+
+	//// 保存得到的点云数据
+	//cout << "save" << endl;
+	//save_cps(save_filename, cps, matched_colors);
+
+	////绘制匹配出的关键点
+	//Mat img_matches;
+	//drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
+	//imshow("【match图】", img_matches);
+	////等待任意按键按下
+	//waitKey(0);
 
 
 
 
-	//cout << "doing triangulation..." << endl;
-	//vector<Vec3i> tri;
-	//TriSubDiv(ptsL, imgL, tri);
 
-	///************************************************************************/
-	///* Draw 3D scene using OpenGL                                           */
-	///************************************************************************/
-	//glutInit(&argc, argv); // must be called first in a glut program
-	//InitGl(); // must be called first in a glut program
+	//gl_main(argc, argv);
 
-	//cout << "creating 3D texture..." << endl;
-	//GLuint tex = Create3DTexture(imgL, tri, ptsL, pts3D, center3D, size3D);
-	//Show(tex, center3D, size3D);
+
+
+
+	cout << "doing triangulation..." << endl;
+	vector<Vec6f> tri;
+	TriSubDiv(p1, img_1, tri);
+
+	/************************************************************************/
+	/* Draw 3D scene using OpenGL                                           */
+	/************************************************************************/
+	glutInit(&argc, argv); // must be called first in a glut program
+	InitGl(); // must be called first in a glut program
+
+	cout << "creating 3D texture..." << endl;
+	GLuint tex = Create3DTexture(img_1, tri, p1, pts3D, center3D, size3D);
+	Show(tex, center3D, size3D);
 }

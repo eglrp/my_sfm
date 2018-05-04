@@ -3,7 +3,7 @@
 /*
 *	创建Delaunay剖分
 */
-void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<Vec3i> &tri)
+void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<cv::Vec6f> &tri)
 {
 	// 这些代码创建了初始的剖分，一个三角形包含一个特定的矩形框。
 	Rect rect(0, 0, img.cols, img.rows); // Our outer bounding box，其中image.size().width==image.cols;
@@ -20,8 +20,8 @@ void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<Vec3i> &tri)
 
 	// 从Delaunay三角剖分中计算三角形
 	// 调用之后，，在三角形中的每个Vec6f包含三个顶点：（x1,y1,x2,y2,x3,y3,）。
-	vector<cv::Vec6f> triangles;
-	subdiv.getTriangleList(triangles);
+	//vector<cv::Vec6f> triangles;
+	subdiv.getTriangleList(tri);
 
 	// 得到对应的Voronoi图。
 	// facets包含Voronoi小面块（里面的点数据只包括多边形的顶点），centers包含对应的区域中心。
@@ -29,12 +29,12 @@ void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<Vec3i> &tri)
 	vector<cv::Point2f> centers;
 	subdiv.getVoronoiFacetList(vector<int>(), facets, centers);
 
-	 
+	
 
 
 	
-	char title[100];
+	/*char title[100];
 	sprintf_s(title, 100, "Delaunay: %d Triangles", tri.size());
 	imshow(title, imgShow);
-	waitKey();
+	waitKey();*/
 }
