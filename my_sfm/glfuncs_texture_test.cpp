@@ -11,7 +11,7 @@
 // draw a triangle texture
 void MapTexTri(Mat & texImg, Point2f pt2D[3], Point3f pt3D[3])
 {
-	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
@@ -28,9 +28,10 @@ void MapTexTri(Mat & texImg, Point2f pt2D[3], Point3f pt3D[3])
 	glBegin(GL_TRIANGLES);
 	//glColor4f(1.0, 1.0, 1.0, 1.0);
 
-	glTexCoord2f(pt2D[0].x, pt2D[0].y); glVertex3f(pt3D[0].x, pt3D[0].y, pt3D[0].z);
-	glTexCoord2f(pt2D[1].x, pt2D[1].y); glVertex3f(pt3D[1].x, pt3D[1].y, pt3D[1].z);
 	glTexCoord2f(pt2D[2].x, pt2D[2].y); glVertex3f(pt3D[2].x, pt3D[2].y, pt3D[2].z);
+	glTexCoord2f(pt2D[1].x, pt2D[1].y); glVertex3f(pt3D[1].x, pt3D[1].y, pt3D[1].z);
+	glTexCoord2f(pt2D[0].x, pt2D[0].y); glVertex3f(pt3D[0].x, pt3D[0].y, pt3D[0].z);
+	
 
 	glEnd();
 
@@ -49,20 +50,25 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 	if (tex == 0) return 0;
 
 	Mat texImg;
-	cvtColor(img, img, CV_BGR2RGB);
+	cvtColor(img, texImg, CV_BGR2RGB);
 	//resize(img, texImg, Size(512, 512)); // seems no need to do this
 
 	glNewList(tex, GL_COMPILE);
+
+
 
 	vector<Vec6f>::iterator iterTri = tri.begin();
 	//vector<Point3f>::iterator iterPts3D = pts3D.begin();
 	Point2f pt2D[3];
 	Point3f pt3D[3];
+	
 
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	for (; iterTri != tri.end(); iterTri++)
 	{
+		int flags = 0;
+		int j = 0;
 		Vec6f it_tri = *iterTri;
 	
 		for (int i = 0; i < 3; i++)
@@ -71,21 +77,23 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 			pt2D[i].y = it_tri[i*2+1] / img.rows;
 
 			// 找到(x,y)对应的pts2d[j],就可以得到对应的pts3d[j]
-			int j;
 			for (j = 0; j < pts2DTex.size(); j++) {
 				if (pts2DTex[j].x == it_tri[i * 2] && pts2DTex[j].y == it_tri[i * 2 + 1]) {
 					break;
 				}
 			}
-
+			if (j == pts2DTex.size()) {
+				flags = 1;
+				break;
+			}
+			cout << j << endl;
 			pt3D[i] = (pts3D[j] - center3D) * (1.f / max(size3D[0], size3D[1]));
-			//pt3D[i].z -= offset;
+			pt3D[i].z = -pt3D[i].z;
 		}
 
-
+		if (!flags) {
 			MapTexTri(texImg, pt2D, pt3D);
-			//cout<<endl;
-
+		}
 	}
 	glDisable(GL_TEXTURE_2D);
 
@@ -95,6 +103,7 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 	//glColor4f(1,0.8,0.1,0.5);
 	//glutSolidSphere(10, 30, 30);
 	//glPopMatrix();
+
 
 	glEndList();
 	return tex;

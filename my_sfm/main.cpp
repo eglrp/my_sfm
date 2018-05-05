@@ -138,6 +138,7 @@ int main(int argc, char *argv[])
 	InitGl(); // must be called first in a glut program
 
 	cout << "creating 3D texture..." << endl;
+	cout << p1.size() << " **** " << pts3D.size();
 	GLuint tex = Create3DTexture(img_1, tri, p1, pts3D, center3D, size3D);
 	Show(tex, center3D, size3D);
 }

@@ -103,9 +103,7 @@
 //		// 通过OpenGL显示。
 //		
 //		glColor3f(fr, fg, fb);	// glcolor3f是rgb的顺序
-//		//glBegin(GL_POINTS);
-//			glVertex3f(x*level, y*level, z*level);
-//		//glEnd();
+//		glVertex3f(x*level, y*level, z*level);
 //	}
 //	glEnd();
 //
