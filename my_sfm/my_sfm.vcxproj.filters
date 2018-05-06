@@ -13,27 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\danmu">
+      <UniqueIdentifier>{fa1a72d9-de0e-444c-975d-1013b9bb8665}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="main_duomu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="funcs_duomu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="funcs_texture_duomu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="glfuncs_texture_duomu.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="funcs.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="glfuncs.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="glfuncs_texture_test.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\danmu</Filter>
     </ClCompile>
     <ClCompile Include="funcs_texture_test.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\danmu</Filter>
+    </ClCompile>
+    <ClCompile Include="glfuncs.cpp">
+      <Filter>源文件\danmu</Filter>
+    </ClCompile>
+    <ClCompile Include="glfuncs_texture_test.cpp">
+      <Filter>源文件\danmu</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件\danmu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sfm_h.h">
+    <ClInclude Include="sfm_h_duomu.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sfm_h.h">
+      <Filter>源文件\danmu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
