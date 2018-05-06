@@ -28,9 +28,10 @@ void MapTexTri(Mat & texImg, Point2f pt2D[3], Point3f pt3D[3])
 	glBegin(GL_TRIANGLES);
 	//glColor4f(1.0, 1.0, 1.0, 1.0);
 
-	glTexCoord2f(pt2D[2].x, pt2D[2].y); glVertex3f(pt3D[2].x, pt3D[2].y, pt3D[2].z);
-	glTexCoord2f(pt2D[1].x, pt2D[1].y); glVertex3f(pt3D[1].x, pt3D[1].y, pt3D[1].z);
 	glTexCoord2f(pt2D[0].x, pt2D[0].y); glVertex3f(pt3D[0].x, pt3D[0].y, pt3D[0].z);
+	glTexCoord2f(pt2D[1].x, pt2D[1].y); glVertex3f(pt3D[1].x, pt3D[1].y, pt3D[1].z);
+	glTexCoord2f(pt2D[2].x, pt2D[2].y); glVertex3f(pt3D[2].x, pt3D[2].y, pt3D[2].z);
+	
 	
 
 	glEnd();
@@ -50,8 +51,8 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 	if (tex == 0) return 0;
 
 	Mat texImg;
-	cvtColor(img, texImg, CV_BGR2RGB);
-	//resize(img, texImg, Size(512, 512)); // seems no need to do this
+	cvtColor(img, img, CV_BGR2RGB);
+	resize(img, texImg, Size(512, 512)); // seems no need to do this
 
 	glNewList(tex, GL_COMPILE);
 
@@ -88,7 +89,7 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 			}
 			cout << j << endl;
 			pt3D[i] = (pts3D[j] - center3D) * (1.f / max(size3D[0], size3D[1]));
-			pt3D[i].z = -pt3D[i].z;
+			//pt3D[i].z = -pt3D[i].z;
 		}
 
 		if (!flags) {

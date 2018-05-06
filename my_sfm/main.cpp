@@ -81,11 +81,11 @@ int main(int argc, char *argv[])
 		Mat_<float> c = cps.col(i);
 		c /= c(3);	//齐次坐标，需要除以最后一个元素才是真正的坐标值
 		pt3D.x = c(0);
-		pt3D.y = c(1);
-		pt3D.z = c(2);
+		pt3D.y = -c(1);
+		pt3D.z = -c(2);
 		minX = min(minX, c(0)); maxX = max(maxX, c(0));
-		minY = min(minY, c(1)); maxY = max(maxY, c(1));
-		minZ = min(minZ, c(2)); maxZ = max(maxZ, c(2));
+		minY = min(minY, -c(1)); maxY = max(maxY, -c(1));
+		minZ = min(minZ, -c(2)); maxZ = max(maxZ, -c(2));
 		pts3D.push_back(pt3D);
 	}
 	center3D.x = (minX + maxX) / 2;
