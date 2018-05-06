@@ -1,6 +1,7 @@
 #ifndef HHH
 #define HHH
 
+#include <io.h>
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
@@ -32,14 +33,50 @@ using namespace std;
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
-void extract_features(Mat &img, vector<KeyPoint> &key_points, Mat &descriptors, vector<Vec3b> &colors);
+
+void init_construct(
+	Mat K, vector<vector<KeyPoint>>& key_points_for_all,
+	vector<vector<Vec3b>>& colors_for_all, vector<vector<DMatch>>& matches_for_all,
+	vector<Point3f>& cps, vector<vector<int>>& correspond_struct_idx,
+	vector<Vec3b>& matched_colors, vector<Mat>& rotations, vector<Mat>& motions
+	);
+void get_img_names(string dir_name, vector<string> & names);
+void extract_features(vector<string>& image_names,
+	vector<vector<KeyPoint>>& key_points_for_all,
+	vector<Mat>& descriptor_for_all,
+	vector<vector<Vec3b>>& colors_for_all
+	);
 void match_features(Mat& query, Mat& train, vector<DMatch>& matches);
+void match_features(vector<Mat>& descriptor_for_all, vector<vector<DMatch>>& matches_for_all);
 bool get_RT(Mat K, vector<Point2f>& p1, vector<Point2f>& p2, Mat &R, Mat &T, Mat &mask);
 void get_matched_colors(vector<Vec3b>& c1, vector<Vec3b>& c2, vector<DMatch> matches, vector<Vec3b>& matched_colors);
-void get_matched_points(vector<KeyPoint> keypoints_1, vector<KeyPoint>keypoints_2, vector<DMatch> matches, vector<Point2f> &p1, vector<Point2f> &p2);
+void get_matched_points(vector<KeyPoint> keypoints_1, 
+	vector<KeyPoint>keypoints_2, 
+	vector<DMatch> matches, 
+	vector<Point2f> &p1, 
+	vector<Point2f> &p2
+	);
+void get_objpoints_and_imgpoints(
+	vector<DMatch>& matches,
+	vector<int>& correspond,
+	vector<Point3f>& cps,
+	vector<KeyPoint>& key_points,
+	vector<Point3f>& object_points,
+	vector<Point2f>& image_points
+	);
 void maskout_points(vector<Point2f>& p1, Mat& mask);
-void reconstruct(Mat& K, Mat& R, Mat& T, vector<Point2f>& p1, vector<Point2f>& p2, Mat& structure);
-bool save_cps(const char *filename, Mat cps, vector<Vec3b> colors);
+void maskout_colors(vector<Vec3b>& p1, Mat& mask);
+void reconstruct(Mat& K, Mat& R1, Mat& T1, Mat& R2, Mat& T2, vector<Point2f>& p1, vector<Point2f>& p2, vector<Point3f>& cps);
+void add_cps(
+	vector<DMatch>& matches,
+	vector<int>& correspond,
+	vector<int>& next_correspond,
+	vector<Point3f>& cps,
+	vector<Point3f>& next_cps,
+	vector<Vec3b>& colors,
+	vector<Vec3b>& next_colors
+	);
+bool save_cps(const char *filename, vector<Point3f> cps, vector<Vec3b> colors);
 
 // opengl相关显示函数
 void show_cps(const char *cp_filename);
