@@ -48,12 +48,10 @@ int main(int argc, char *argv[])
 	vector<Vec3b> colors;
 	vector<Mat> rotations;
 	vector<Mat> motions;
-	cout << "a" << endl;
 	// 利用前两幅图片进行初始的构建
 	init_construct(K,key_points_for_all,colors_for_all,matches_for_all,
 		cps,correspond_cps_idx,colors,rotations,motions
 		);
-	cout << "b" << endl;
 	//增量方式重建剩余的图像
 	for (int i = 1; i < matches_for_all.size(); ++i)
 	{
@@ -71,28 +69,22 @@ int main(int argc, char *argv[])
 			object_points,
 			image_points
 			);
-		cout << "c" << endl;
 		//求解变换矩阵
 		solvePnPRansac(object_points, image_points, K, noArray(), r, T); 
-		cout << "d" << endl;
 		//将旋转向量转换为旋转矩阵
 		Rodrigues(r, R);
-		cout << "e" << endl;
 		//保存变换矩阵
 		rotations.push_back(R);
 		motions.push_back(T);
 
 		vector<Point2f> p1, p2;
 		vector<Vec3b> matched_colors;
-		cout << "f" << endl;
 		get_matched_points(key_points_for_all[i], key_points_for_all[i + 1], matches_for_all[i], p1, p2);
 		get_matched_colors(colors_for_all[i], colors_for_all[i + 1], matches_for_all[i], matched_colors);
 
 		//根据之前求得的R，T进行三维重建
 		vector<Point3f> next_cps;
-		cout << "g" << endl;
 		reconstruct(K, rotations[i], motions[i], R, T, p1, p2, next_cps);
-		cout << "h" << endl;
 		//将新得到的点云加入之前已有的
 		add_cps(
 			matches_for_all[i],
@@ -103,28 +95,28 @@ int main(int argc, char *argv[])
 			colors,
 			matched_colors
 			);
-		cout << "i" << endl;
 	}
 
 	// 保存得到的点云数据
 	cout << "save" << endl;
 	save_cps(save_filename, cps, colors);
 
-	//vector<Point3f> pts3D;
+	vector<Point3f> pts3D;
 	Point3f center3D;
 	Vec3f size3D;
 	float minX = 1e9, maxX = -1e9;
 	float minY = 1e9, maxY = -1e9;
 	float minZ = 1e9, maxZ = -1e9;
 	for (size_t i = 0; i < cps.size(); ++i) {
-	/*	Point3f pt3D;
+		// opengl的坐标轴和计算得到三维点的坐标轴不同，yz需取反
+		Point3f pt3D;
 		pt3D.x = cps[i].x;
-		pt3D.y = cps[i].y;
-		pt3D.z = cps[i].z;*/
+		pt3D.y = -cps[i].y;
+		pt3D.z = -cps[i].z;
 		minX = min(minX, cps[i].x); maxX = max(maxX, cps[i].x);
-		minY = min(minY, cps[i].y); maxY = max(maxY, cps[i].y);
-		minZ = min(minZ, cps[i].z); maxZ = max(maxZ, cps[i].z);
-		//pts3D.push_back(pt3D);
+		minY = min(minY, -cps[i].y); maxY = max(maxY, -cps[i].y);
+		minZ = min(minZ, -cps[i].z); maxZ = max(maxZ, -cps[i].z);
+		pts3D.push_back(pt3D);
 	}
 	center3D.x = (minX + maxX) / 2;
 	center3D.y = (minY + maxY) / 2;
@@ -137,6 +129,8 @@ int main(int argc, char *argv[])
 	vector<Vec6f> tri;	// 存储每幅图的三角剖分结果
 	vector<vector<Vec3i>> tri_no;	// 存放所有图像三角剖分结果（每个顶点从坐标转换成对应特征点的序号）
 	for (int i = 0; i < images.size()-1; i++) {
+		vector<Vec3i> temp_tri;
+		cout << i << endl;
 		TriSubDiv(key_points_for_all[i], matches_for_all[i], images[i], tri);
 		Vec3i temp;
 		vector<Vec6f>::iterator it_tri = tri.begin();
@@ -156,16 +150,21 @@ int main(int argc, char *argv[])
 					}	
 				}
 				// 如果没有找到对应点，则结束这个三角形，开始下一个，同时给标记赋0
-				if (it_match != matches_for_all[i].end()) {
+				// 如果对应的点没有对应三维点也去掉
+				// TODO: 这样的话我一开始三角剖分的时候就应该使用这些最后真正的匹配点
+				if (it_match == matches_for_all[i].end() || correspond_cps_idx[i][temp[j]] == -1) {
 					flag = 0;
 					break;
 				}
 			}
 			if (flag != 0) {
-				tri_no[i].push_back(temp);
+				temp_tri.push_back(temp);
 			} 
 		}
+		cout << temp_tri.size() << endl;
+		tri_no.push_back(temp_tri);
 	}
+	cout << "last" << endl;
 	// 最后一幅图像单独进行三角剖分
 	tri.clear();
 	Rect rect(0, 0, images[images.size() - 1].cols, images[images.size() - 1].rows); // Our outer bounding box，其中image.size().width==image.cols;
@@ -173,13 +172,13 @@ int main(int argc, char *argv[])
 	Point2f fp;
 	for (size_t i = 0; i < matches_for_all[images.size() - 2].size(); i++)
 	{
-		fp = key_points_for_all[images.size() - 2][matches_for_all[images.size() - 2][i].trainIdx].pt;
+		fp = key_points_for_all[images.size() - 1][matches_for_all[images.size() - 2][i].trainIdx].pt;
 		subdiv.insert(fp);
 	}
 	subdiv.getTriangleList(tri);
 	Vec3i temp;
 	vector<Vec6f>::iterator it_tri = tri.begin();
-	int i = images.size() - 2;
+	vector<Vec3i> temp_tri;
 	// 遍历每个三角形
 	for (; it_tri != tri.end(); it_tri++){
 		int flag = 1;	// flag为0表示没找到对应点
@@ -188,24 +187,25 @@ int main(int argc, char *argv[])
 			float tempx = (*it_tri)[j * 2];
 			float tempy = (*it_tri)[j * 2 + 1];
 			// 遍历matches,找出对应的特征点序号	// TODO 这边是不是可以改变循环顺序，达到只遍历一次match而找三个点的目的？
-			vector<DMatch>::iterator it_match = matches_for_all[i].begin();
-			for (; it_match != matches_for_all[i].end(); it_match++) {
-				if (tempx == key_points_for_all[i][(*it_match).trainIdx].pt.x && tempy == key_points_for_all[i][(*it_match).trainIdx].pt.y) {
+			vector<DMatch>::iterator it_match = matches_for_all[images.size() - 2].begin();
+			for (; it_match != matches_for_all[images.size() - 2].end(); it_match++) {
+				if (tempx == key_points_for_all[images.size() - 1][(*it_match).trainIdx].pt.x && tempy == key_points_for_all[images.size() - 1][(*it_match).trainIdx].pt.y) {
 					temp[j] = (*it_match).trainIdx;
 					break;
 				}
 			}
 			// 如果没有找到对应点，则结束这个三角形，开始下一个，同时给标记赋0
-			if (it_match != matches_for_all[i].end()) {
+			if (it_match == matches_for_all[images.size() - 2].end() || correspond_cps_idx[images.size() - 1][temp[j]] == -1) {
 				flag = 0;
 				break;
 			}
 		}
 		if (flag != 0) {
-			tri_no[i+1].push_back(temp);
+			temp_tri.push_back(temp);
 		}
 	}
-
+	cout << temp_tri.size() << endl;
+	tri_no.push_back(temp_tri);
 
 	/************************************************************************/
 	/* Draw 3D scene using OpenGL                                           */
@@ -214,7 +214,7 @@ int main(int argc, char *argv[])
 	InitGl(); // must be called first in a glut program
 	
 	cout << "creating 3D texture..." << endl;
-	GLuint tex = Create3DTexture(images, tri_no, key_points_for_all, cps, center3D, size3D);
+	GLuint tex = Create3DTexture(images, tri_no, key_points_for_all, pts3D, center3D, size3D, correspond_cps_idx);
 	Show(tex, center3D, size3D);
 
 }

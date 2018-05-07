@@ -86,7 +86,8 @@ GLuint Create3DTexture(vector<Mat> &images,
 	vector<vector<Vec3i>> &tri,
 	vector<vector<KeyPoint>> keypoints_for_all, 
 	vector<Point3f> &cps,
-	Point3f center3D, Vec3f size3D
+	Point3f center3D, Vec3f size3D,
+	vector<vector<int>> correspond
 	);
 
 

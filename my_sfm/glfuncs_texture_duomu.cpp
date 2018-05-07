@@ -40,9 +40,12 @@ void MapTexTri(Mat & texImg, Point2f pt2D[3], Point3f pt3D[3])
 	//glDisable(GL_BLEND);
 }
 
-GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
-	vector<Point2f> pts2DTex, vector<Point3f> &pts3D,
-	Point3f center3D, Vec3f size3D)
+GLuint Create3DTexture(vector<Mat> &images,
+	vector<vector<Vec3i>> &tri,
+	vector<vector<KeyPoint>> keypoints_for_all,
+	vector<Point3f> &cps,
+	Point3f center3D, Vec3f size3D,
+	vector<vector<int>> correspond)
 {
 	GLuint tex = glGenLists(1);
 	int error = glGetError();
@@ -50,52 +53,45 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 		cout << "An OpenGL error has occured: " << gluErrorString(error) << endl;
 	if (tex == 0) return 0;
 
-	Mat texImg;
-	cvtColor(img, img, CV_BGR2RGB);
-	resize(img, texImg, Size(512, 512)); // seems no need to do this
-
 	glNewList(tex, GL_COMPILE);
-
-
-
-	vector<Vec6f>::iterator iterTri = tri.begin();
-	//vector<Point3f>::iterator iterPts3D = pts3D.begin();
-	Point2f pt2D[3];
-	Point3f pt3D[3];
-	
 
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	for (; iterTri != tri.end(); iterTri++)
-	{
-		int flags = 0;
+	for (int order = 0; order < images.size(); order++) {
+
+		if (order != 0 && order != 2) continue;	// 测试时只取2幅图
+		cout << endl << "***" << order << "***" << endl;
+		Point2f pt2D[3];
+		Point3f pt3D[3];
+		Mat texImg;
+		Mat img = images[order];
+		cvtColor(img, img, CV_BGR2RGB);
+		resize(img, texImg, Size(512, 512)); // seems no need to do this
 		int j = 0;
-		Vec6f it_tri = *iterTri;
-	
-		for (int i = 0; i < 3; i++)
+		vector<Vec3i>::iterator iterTri = tri[order].begin();
+		for (; iterTri != tri[order].end(); iterTri++)
 		{
-			pt2D[i].x = it_tri[i*2] / img.cols;
-			pt2D[i].y = it_tri[i*2+1] / img.rows;
+			cout << ++j << "  ";
+			//int flags = 0;
+			
+			Vec3i it_tri = *iterTri;
 
-			// 找到(x,y)对应的pts2d[j],就可以得到对应的pts3d[j]
-			for (j = 0; j < pts2DTex.size(); j++) {
-				if (pts2DTex[j].x == it_tri[i * 2] && pts2DTex[j].y == it_tri[i * 2 + 1]) {
-					break;
-				}
+			for (int i = 0; i < 3; i++)
+			{
+				pt2D[i].x = keypoints_for_all[order][it_tri[i]].pt.x / img.cols;
+				pt2D[i].y = keypoints_for_all[order][it_tri[i]].pt.y / img.rows;
+
+				pt3D[i] = (cps[correspond[order][it_tri[i]]] - center3D) * (1.f / max(size3D[0], size3D[1]));
 			}
-			if (j == pts2DTex.size()) {
-				flags = 1;
-				break;
-			}
-			cout << j << endl;
-			pt3D[i] = (pts3D[j] - center3D) * (1.f / max(size3D[0], size3D[1]));
-			//pt3D[i].z = -pt3D[i].z;
+
+//			if (!flags) {
+				MapTexTri(texImg, pt2D, pt3D);
+//			}
 		}
 
-		if (!flags) {
-			MapTexTri(texImg, pt2D, pt3D);
-		}
+		system("pause");
 	}
+	
 	glDisable(GL_TEXTURE_2D);
 
 	glEndList();
