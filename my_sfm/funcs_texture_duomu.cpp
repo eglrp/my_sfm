@@ -3,8 +3,9 @@
 /*
 *	创建Delaunay剖分
 */
-void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<cv::Vec6f> &tri)
+void TriSubDiv(vector<KeyPoint>keypoints, vector<DMatch> &matches, Mat &img, vector<cv::Vec6f> &tri)
 {
+	tri.clear();
 	// 这些代码创建了初始的剖分，一个三角形包含一个特定的矩形框。
 	Rect rect(0, 0, img.cols, img.rows); // Our outer bounding box，其中image.size().width==image.cols;
 	Subdiv2D subdiv(rect);				// Create the initial subdivision
@@ -12,9 +13,9 @@ void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<cv::Vec6f> &tri)
 	// 插入点，这些点必须是32位float类型的，或者是带有整数坐标值的点（cv::Point）
 	// typedef Point_<float> Point2f; 这个是float类型的，所以就不转了
 	Point2f fp;
-	for (size_t i = 0; i < pts.size(); i++)
+	for (size_t i = 0; i < matches.size(); i++)
 	{
-		fp = pts[i];
+		fp = keypoints[matches[i].queryIdx].pt;
 		subdiv.insert(fp);
 	}
 
@@ -29,12 +30,4 @@ void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<cv::Vec6f> &tri)
 	vector<cv::Point2f> centers;
 	subdiv.getVoronoiFacetList(vector<int>(), facets, centers);
 
-
-
-
-
-	/*char title[100];
-	sprintf_s(title, 100, "Delaunay: %d Triangles", tri.size());
-	imshow(title, imgShow);
-	waitKey();*/
 }

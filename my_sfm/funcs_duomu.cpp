@@ -32,7 +32,7 @@ void get_img_names(string dir_name, vector<string> & names)
 /*
 *	该函数用于提取特征点,保存特征点信息，描述子信息，以及颜色信息
 */
-void extract_features(vector<string>& image_names,
+void extract_features(vector<Mat>& images,
 	vector<vector<KeyPoint>>& key_points_for_all,
 	vector<Mat>& descriptor_for_all,
 	vector<vector<Vec3b>>& colors_for_all) {
@@ -41,13 +41,12 @@ void extract_features(vector<string>& image_names,
 	Mat img;
 	key_points_for_all.clear();
 	descriptor_for_all.clear();
-
-	for (auto it = image_names.begin(); it != image_names.end(); ++it)
+	int img_no = 0;
+	for (auto it = images.begin(); it != images.end(); ++it)
 	{
-		img = imread(*it);
-		if (img.empty()) continue;
+		img = *it;
 
-		cout << "Extracing features: " << *it << endl;
+		cout << "Extracing features from img-" << ++img_no << endl;
 
 		// 提取特征点并生成特征向量
 		vector<KeyPoint> key_points;
@@ -201,7 +200,7 @@ void init_construct(
 	correspond_cps_idx.resize(key_points_for_all.size());
 	for (int i = 0; i < key_points_for_all.size(); ++i)
 	{
-		correspond_cps_idx[i].resize(key_points_for_all[i].size(), -1);
+		correspond_cps_idx[i].resize(key_points_for_all[i].size(), -1);	// 全部赋初值为-1，之后没有对应的即是 
 	}
 
 	//填写头两幅图像的结构索引

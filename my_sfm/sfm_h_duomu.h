@@ -41,7 +41,7 @@ void init_construct(
 	vector<Vec3b>& matched_colors, vector<Mat>& rotations, vector<Mat>& motions
 	);
 void get_img_names(string dir_name, vector<string> & names);
-void extract_features(vector<string>& image_names,
+void extract_features(vector<Mat>& images,
 	vector<vector<KeyPoint>>& key_points_for_all,
 	vector<Mat>& descriptor_for_all,
 	vector<vector<Vec3b>>& colors_for_all
@@ -78,24 +78,16 @@ void add_cps(
 	);
 bool save_cps(const char *filename, vector<Point3f> cps, vector<Vec3b> colors);
 
-// opengl相关显示函数
-void show_cps(const char *cp_filename);
-void gl_main(int argc, char *argv[]);
-
-
-
-
-
-
-
-
-void TriSubDiv(vector<Point2f> &pts, Mat &img, vector<cv::Vec6f> &tri);
+// 纹理贴图相关函数
+void TriSubDiv(vector<KeyPoint>keypoints, vector<DMatch> &matches, Mat &img, vector<cv::Vec6f> &tri);
 void MapTexTri(Mat & texImg, Point2f pt2D, Point3f pt3D);
 
-GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
-	vector<Point2f> pts2DTex, vector<Point3f> &pts3D,
-	Point3f center3D, Vec3f size3D);
-
+GLuint Create3DTexture(vector<Mat> &images, 
+	vector<vector<Vec3i>> &tri,
+	vector<vector<KeyPoint>> keypoints_for_all, 
+	vector<Point3f> &cps,
+	Point3f center3D, Vec3f size3D
+	);
 
 
 /* OpenGL functions*/

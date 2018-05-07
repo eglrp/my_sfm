@@ -8,62 +8,6 @@ int main(int argc, char *argv[])
 	//// TODO 把cout删掉
 
 
-
-
-
-
-
-
-
-	//vector<Point3f> pts3D;
-	//Point3f center3D;
-	//Vec3f size3D;
-	//float minX = 1e9, maxX = -1e9;
-	//float minY = 1e9, maxY = -1e9;
-	//float minZ = 1e9, maxZ = -1e9;
-	//for (size_t i = 0; i < cps.cols; ++i) {
-	//	Point3f pt3D;
-	//	Mat_<float> c = cps.col(i);
-	//	c /= c(3);	//齐次坐标，需要除以最后一个元素才是真正的坐标值
-	//	// 这里计算出的y轴和z轴的正方向与opengl中y轴和z轴
-	//	pt3D.x = c(0);
-	//	pt3D.y = -c(1);
-	//	pt3D.z = -c(2);
-	//	minX = min(minX, c(0)); maxX = max(maxX, c(0));
-	//	minY = min(minY, -c(1)); maxY = max(maxY, -c(1));
-	//	minZ = min(minZ, -c(2)); maxZ = max(maxZ, -c(2));
-	//	pts3D.push_back(pt3D);
-	//}
-	//center3D.x = (minX + maxX) / 2;
-	//center3D.y = (minY + maxY) / 2;
-	//center3D.z = (minZ + maxZ) / 2;
-	//size3D[0] = maxX - minX;
-	//size3D[1] = maxY - minY;
-	//size3D[2] = maxZ - minZ;
-
-
-
-
-
-
-	//cout << "doing triangulation..." << endl;
-	//vector<Vec6f> tri;
-	//TriSubDiv(p1, img_1, tri);
-
-	///************************************************************************/
-	///* Draw 3D scene using OpenGL                                           */
-	///************************************************************************/
-	//glutInit(&argc, argv); // must be called first in a glut program
-	//InitGl(); // must be called first in a glut program
-
-	//cout << "creating 3D texture..." << endl;
-	//cout << p1.size() << " **** " << pts3D.size();
-	//GLuint tex = Create3DTexture(img_1, tri, p1, pts3D, center3D, size3D);
-	//Show(tex, center3D, size3D);
-
-
-
-
 	/*内参矩阵				
 			fx    s    x0
 		K = 0    fy   y0
@@ -78,23 +22,26 @@ int main(int argc, char *argv[])
 	vector<string> img_names;		// 用于重构的图片名字列表
 
 	vector<vector<KeyPoint>> key_points_for_all;	// 存放所有图片的特征点
-	vector<Mat> descriptor_for_all;					// 存放所有图片的描述子
+	vector<Mat> descriptors_for_all;					// 存放所有图片的描述子
 	vector<vector<Vec3b>> colors_for_all;			// 存放特征点处颜色
 	vector<vector<DMatch>> matches_for_all;			// 存放匹配点对
 
 	// 获取目录下的图片
 	get_img_names(img_dir, img_names);
+	vector<Mat> images;
 
-
-	//vector<string>::iterator it = img_names.begin();
-	//for (; it != img_names.end(); it++) {
-	//	cout << *it << endl;
-	//}
+	vector<string>::iterator it = img_names.begin();
+	for (; it != img_names.end(); it++) {
+		Mat temp = imread(*it);
+		if (temp.empty()) continue;
+		cout << "reading img " << *it << endl;
+		images.push_back(temp);
+	}
 
 	// 提取所有图像的特征点
-	extract_features(img_names, key_points_for_all, descriptor_for_all, colors_for_all);
+	extract_features(images, key_points_for_all, descriptors_for_all, colors_for_all);
 	//对所有图像进行顺次的特征匹配
-	match_features(descriptor_for_all, matches_for_all);
+	match_features(descriptors_for_all, matches_for_all);
 	
 	vector<Point3f> cps;
 	vector<vector<int>> correspond_cps_idx; //保存第i副图像中第j个特征点对应的cps中点的索引
@@ -163,5 +110,111 @@ int main(int argc, char *argv[])
 	cout << "save" << endl;
 	save_cps(save_filename, cps, colors);
 
-	return 0;
+	//vector<Point3f> pts3D;
+	Point3f center3D;
+	Vec3f size3D;
+	float minX = 1e9, maxX = -1e9;
+	float minY = 1e9, maxY = -1e9;
+	float minZ = 1e9, maxZ = -1e9;
+	for (size_t i = 0; i < cps.size(); ++i) {
+	/*	Point3f pt3D;
+		pt3D.x = cps[i].x;
+		pt3D.y = cps[i].y;
+		pt3D.z = cps[i].z;*/
+		minX = min(minX, cps[i].x); maxX = max(maxX, cps[i].x);
+		minY = min(minY, cps[i].y); maxY = max(maxY, cps[i].y);
+		minZ = min(minZ, cps[i].z); maxZ = max(maxZ, cps[i].z);
+		//pts3D.push_back(pt3D);
+	}
+	center3D.x = (minX + maxX) / 2;
+	center3D.y = (minY + maxY) / 2;
+	center3D.z = (minZ + maxZ) / 2;
+	size3D[0] = maxX - minX;
+	size3D[1] = maxY - minY;
+	size3D[2] = maxZ - minZ;
+
+	cout << "doing triangulation..." << endl;
+	vector<Vec6f> tri;	// 存储每幅图的三角剖分结果
+	vector<vector<Vec3i>> tri_no;	// 存放所有图像三角剖分结果（每个顶点从坐标转换成对应特征点的序号）
+	for (int i = 0; i < images.size()-1; i++) {
+		TriSubDiv(key_points_for_all[i], matches_for_all[i], images[i], tri);
+		Vec3i temp;
+		vector<Vec6f>::iterator it_tri = tri.begin();
+		// 遍历每个三角形
+		for (; it_tri != tri.end(); it_tri++){
+			int flag = 1;	// flag为0表示没找到对应点
+			// 遍历tri中每个顶点
+			for (int j = 0; j < 3; j++){
+				float tempx = (*it_tri)[j * 2];
+				float tempy = (*it_tri)[j * 2 + 1];
+				// 遍历matches,找出对应的特征点序号	// TODO 这边是不是可以改变循环顺序，达到只遍历一次match而找三个点的目的？
+				vector<DMatch>::iterator it_match = matches_for_all[i].begin();
+				for (; it_match != matches_for_all[i].end(); it_match++) {
+					if (tempx == key_points_for_all[i][(*it_match).queryIdx].pt.x && tempy == key_points_for_all[i][(*it_match).queryIdx].pt.y) {
+						temp[j] = (*it_match).queryIdx;
+						break;
+					}	
+				}
+				// 如果没有找到对应点，则结束这个三角形，开始下一个，同时给标记赋0
+				if (it_match != matches_for_all[i].end()) {
+					flag = 0;
+					break;
+				}
+			}
+			if (flag != 0) {
+				tri_no[i].push_back(temp);
+			} 
+		}
+	}
+	// 最后一幅图像单独进行三角剖分
+	tri.clear();
+	Rect rect(0, 0, images[images.size() - 1].cols, images[images.size() - 1].rows); // Our outer bounding box，其中image.size().width==image.cols;
+	Subdiv2D subdiv(rect);				// Create the initial subdivision
+	Point2f fp;
+	for (size_t i = 0; i < matches_for_all[images.size() - 2].size(); i++)
+	{
+		fp = key_points_for_all[images.size() - 2][matches_for_all[images.size() - 2][i].trainIdx].pt;
+		subdiv.insert(fp);
+	}
+	subdiv.getTriangleList(tri);
+	Vec3i temp;
+	vector<Vec6f>::iterator it_tri = tri.begin();
+	int i = images.size() - 2;
+	// 遍历每个三角形
+	for (; it_tri != tri.end(); it_tri++){
+		int flag = 1;	// flag为0表示没找到对应点
+		// 遍历tri中每个顶点
+		for (int j = 0; j < 3; j++){
+			float tempx = (*it_tri)[j * 2];
+			float tempy = (*it_tri)[j * 2 + 1];
+			// 遍历matches,找出对应的特征点序号	// TODO 这边是不是可以改变循环顺序，达到只遍历一次match而找三个点的目的？
+			vector<DMatch>::iterator it_match = matches_for_all[i].begin();
+			for (; it_match != matches_for_all[i].end(); it_match++) {
+				if (tempx == key_points_for_all[i][(*it_match).trainIdx].pt.x && tempy == key_points_for_all[i][(*it_match).trainIdx].pt.y) {
+					temp[j] = (*it_match).trainIdx;
+					break;
+				}
+			}
+			// 如果没有找到对应点，则结束这个三角形，开始下一个，同时给标记赋0
+			if (it_match != matches_for_all[i].end()) {
+				flag = 0;
+				break;
+			}
+		}
+		if (flag != 0) {
+			tri_no[i+1].push_back(temp);
+		}
+	}
+
+
+	/************************************************************************/
+	/* Draw 3D scene using OpenGL                                           */
+	/************************************************************************/
+	glutInit(&argc, argv); // must be called first in a glut program
+	InitGl(); // must be called first in a glut program
+	
+	cout << "creating 3D texture..." << endl;
+	GLuint tex = Create3DTexture(images, tri_no, key_points_for_all, cps, center3D, size3D);
+	Show(tex, center3D, size3D);
+
 }

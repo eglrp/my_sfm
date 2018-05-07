@@ -98,14 +98,6 @@ GLuint Create3DTexture(Mat &img, vector<Vec6f> &tri,
 	}
 	glDisable(GL_TEXTURE_2D);
 
-	//glPushMatrix();
-	//glLoadIdentity();
-	//glTranslatef(0,0,700);
-	//glColor4f(1,0.8,0.1,0.5);
-	//glutSolidSphere(10, 30, 30);
-	//glPopMatrix();
-
-
 	glEndList();
 	return tex;
 
