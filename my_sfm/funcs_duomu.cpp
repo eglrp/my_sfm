@@ -7,7 +7,6 @@ void get_img_names(string dir_name, vector<string> & names)
 {
 	names.clear();
 	// 文件句柄
-	
 	intptr_t hFile = 0;
 	// 文件信息
 	struct _finddata_t fileinfo;

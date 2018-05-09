@@ -15,6 +15,11 @@
 #include <opencv2\features2d\features2d.hpp>
 #include <opencv2\highgui\highgui.hpp>
 #include <opencv2\calib3d\calib3d.hpp>
+// 标定相关
+#include <cxcore.h>
+#include <cv.h>
+#include <highgui.h>
+#include <cvaux.h>
 
 // opengl相关头文件
 #include <gl/glut.h>
@@ -109,15 +114,6 @@ void keyboard_control_Gl(unsigned char key, int a, int b);
 void special_control_Gl(int key, int x, int y);
 
 void Show(GLuint tex, Point3f center3D, Vec3i size3D);
-
-
-
-
-
-
-
-
-
 
 extern char *save_filename;
 extern char *read_filename;
