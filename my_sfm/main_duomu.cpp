@@ -13,9 +13,13 @@ int main(int argc, char *argv[])
 		K = 0    fy   y0
 			0    0    1
 	*/
-	Mat K(Matx33d(
-	2759.48, 0, 1520.69,
-	0, 2764.16, 1006.81,
+	/*Mat K(Matx33d(
+	2759.48, 0, 1520.69/5,
+	0, 2764.16, 1006.81/5,
+	0, 0, 1));*/
+Mat K(Matx33d(
+	6920, 0, 2080/5,
+	0, 6920, 1560/5,
 	0, 0, 1));
 
 	string img_dir = "D:\\images";	// 用于重构的图片所在目录
@@ -34,6 +38,7 @@ int main(int argc, char *argv[])
 	for (; it != img_names.end(); it++) {
 		Mat temp = imread(*it);
 		if (temp.empty()) continue;
+		resize(temp, temp, Size(), 0.2, 0.2);
 		cout << "reading img " << *it << endl;
 		images.push_back(temp);
 	}

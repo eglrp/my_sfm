@@ -32,8 +32,6 @@ void MapTexTri(Mat & texImg, Point2f pt2D[3], Point3f pt3D[3])
 	glTexCoord2f(pt2D[1].x, pt2D[1].y); glVertex3f(pt3D[1].x, pt3D[1].y, pt3D[1].z);
 	glTexCoord2f(pt2D[2].x, pt2D[2].y); glVertex3f(pt3D[2].x, pt3D[2].y, pt3D[2].z);
 	
-	
-
 	glEnd();
 
 	//glDisable(GL_TEXTURE_2D);
@@ -55,18 +53,18 @@ GLuint Create3DTexture(vector<Mat> &images,
 
 	glNewList(tex, GL_COMPILE);
 
-	glDisable(GL_BLEND);
+	glDisable(GL_BLEND);	// 禁用混合，即无透明度
 	glEnable(GL_TEXTURE_2D);
 	for (int order = 0; order < images.size(); order++) {
 
-		if (order != 0 && order != 2) continue;	// 测试时只取2幅图
+		if (order != 0 && order != 2 && order != 4 && order != 6 && order != 8 && order != 10) continue;	// 测试时只取2幅图
 		cout << endl << "***" << order << "***" << endl;
 		Point2f pt2D[3];
 		Point3f pt3D[3];
 		Mat texImg;
 		Mat img = images[order];
 		cvtColor(img, img, CV_BGR2RGB);
-		resize(img, texImg, Size(512, 512)); // seems no need to do this
+		resize(img, texImg, Size(256, 256)); // seems no need to do this
 		int j = 0;
 		vector<Vec3i>::iterator iterTri = tri[order].begin();
 		for (; iterTri != tri[order].end(); iterTri++)
@@ -289,22 +287,22 @@ void special_control_Gl(int key, int x, int y)
 	if (key == GLUT_KEY_LEFT)
 	{
 		g_rx -= ROTATE_STEP;
-		if (g_rx<1) g_rx = 1;
+		//if (g_rx<1) g_rx = 1;
 	}
 	else if (key == GLUT_KEY_RIGHT)
 	{
 		g_rx += ROTATE_STEP;
-		if (g_rx >= 179) g_rx = 179;
+		//if (g_rx >= 179) g_rx = 179;
 	}
 	else if (key == GLUT_KEY_UP)
 	{
 		g_ry -= ROTATE_STEP;
-		if (g_ry<-89) g_ry = -89;
+		//if (g_ry<-89) g_ry = -89;
 	}
 	else if (key == GLUT_KEY_DOWN)
 	{
 		g_ry += ROTATE_STEP;
-		if (g_ry >= 89) g_ry = 89;
+		//if (g_ry >= 89) g_ry = 89;
 	}
 	glutPostRedisplay();
 }

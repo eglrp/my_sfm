@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="biaoding.cpp" />
     <ClCompile Include="funcs.cpp" />
     <ClCompile Include="funcs_duomu.cpp" />
     <ClCompile Include="funcs_texture_duomu.cpp" />

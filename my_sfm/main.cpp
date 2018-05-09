@@ -10,19 +10,19 @@
 //
 //	/*内参矩阵				
 //			fx    s    x0
-//		K = 0    fy   y0
+//		K = 0    fy   y0		fx = f/dx
 //			0    0    1
 //	*/
 //	/*Mat K(Matx33d(
-//		2759.48, 0, 1520.69,
-//		0, 2764.16, 1006.81,
-//		0, 0, 1));*/
-//	Mat K(Matx33d(
 //	2759.48, 0, 1520.69,
 //	0, 2764.16, 1006.81,
-//	0, 0, 1));
+//	0, 0, 1));*/
+//	Mat K(Matx33d(
+//		6920, 0, 2080,
+//		0, 6920, 1560,
+//		0, 0, 1));
 //
-//	namedWindow("【match图】", 0);
+//	//namedWindow("【match图】", 0);
 //
 //	// 读入图像
 //	cout << "loading..." << endl;
@@ -30,8 +30,10 @@
 //	Mat img_2_raw = imread("D:\\0006.png");
 //	Mat img_1;
 //	Mat img_2;*/
-//	Mat img_1 = imread("D:\\0004.png");
-//	Mat img_2 = imread("D:\\0006.png");
+//	Mat img_1 = imread("D:\\4.jpg");
+//	Mat img_2 = imread("D:\\6.jpg");
+//	/*Mat img_1 = imread("D:\\004.jpg");
+//	Mat img_2 = imread("D:\\006.jpg");*/
 //	vector<Vec3b> colors1;
 //	vector<Vec3b> colors2;
 //	
@@ -116,12 +118,12 @@
 //	cout << "save" << endl;
 //	save_cps(save_filename, cps, matched_colors);
 //
-//	//绘制匹配出的关键点
-//	Mat img_matches;
-//	drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
-//	imshow("【match图】", img_matches);
-//	//等待任意按键按下
-//	waitKey(0);
+//	////绘制匹配出的关键点
+//	//Mat img_matches;
+//	//drawMatches(img_1, keypoints_1, img_2, keypoints_2, matches, img_matches);
+//	//imshow("【match图】", img_matches);
+//	////等待任意按键按下
+//	//waitKey(0);
 //
 //	//gl_main(argc, argv);
 //

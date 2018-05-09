@@ -155,10 +155,6 @@ void get_objpoints_and_imgpoints(
 	}
 }
 
-
-
-
-
 /*
 *	初始化构建
 */
